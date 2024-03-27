@@ -1,16 +1,8 @@
 # pokedex_tracker
 
-A new Flutter project.
+Pokedex Tracker app is for tracking pokemons while completing national dex especially in older games where you have to play multiple games, sometimes you may accidentally invest time in trying to catch a rare pokemon which you may later realised you have already caught in the previous game.
 
-## Getting Started
+## If you want to modfy or improve the app
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I have colected all the data by scarping of pokemon list in json format the python script for doing so is
+https://github.com/SatyamAK/Pokedex-data-scarping
