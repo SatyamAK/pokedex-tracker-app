@@ -1,5 +1,5 @@
 {
-    "name": "pokedex_tracker",
+    "name": "Pokedex Tracker",
     "short_name": "pokedex_tracker",
     "start_url": ".",
     "display": "standalone",
