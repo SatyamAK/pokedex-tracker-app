@@ -1,4 +1,6 @@
 fileignoreconfig:
+- filename: pubspec.lock
+  checksum: a446e95430c7749ac80a8ef3ae58c779d18e18cdcca07f47e618050746abed1d
 - filename: .metadata
   checksum: 52bd7cb65de16cf78a515cb8d8845744641e7a322c723f51f48d35ef164c68ce
 - filename: pubspec.lock
