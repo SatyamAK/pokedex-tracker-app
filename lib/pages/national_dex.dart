@@ -5,17 +5,36 @@ import 'package:flutter/services.dart';
 import 'package:pokedex_tracker/components/pokemon_card.dart';
 
 class NationalDex extends StatelessWidget {
-  const NationalDex({super.key});
+  final String selectedGeneration;
+  const NationalDex(this.selectedGeneration, {super.key});
 
 
   Future<Map<String, dynamic>> _loadPokemons() async {
     final String data = await rootBundle.loadString('data/pokedex.json');
     final Map<String, dynamic> pokemonsGenerationWise = await jsonDecode(data);
-    return pokemonsGenerationWise;
+    final Map<String, dynamic> requiredPokemonsGenerationWise = <String, dynamic>{};
+    await Future.delayed(const Duration(seconds: 1));
+    for(var generation in pokemonsGenerationWise.keys) {
+      if(generation == selectedGeneration) {
+        requiredPokemonsGenerationWise[generation] = pokemonsGenerationWise[generation];
+        break;
+      }
+      requiredPokemonsGenerationWise[generation] = pokemonsGenerationWise[generation];
+    }
+    return requiredPokemonsGenerationWise;
   } 
 
   @override 
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('National Dex'),
+      ),
+      body: nationalDex(context),
+    );
+  }
+
+  Widget nationalDex(BuildContext context) {
     return FutureBuilder(
       future: _loadPokemons(),
       builder: (context, snapshot) => snapshot.hasData?SingleChildScrollView(
@@ -27,7 +46,6 @@ class NationalDex extends StatelessWidget {
             String generation = snapshot.data!.keys.elementAt(index);
             dynamic pokemons = snapshot.data![generation];
             return Column(
-              //mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(generation),
                 ListView.builder(
@@ -42,7 +60,7 @@ class NationalDex extends StatelessWidget {
             );
           },
         )
-      ):const Center(child: Text('oops'),)
+      ):const Center( child: CircularProgressIndicator())
     );
   }
 }
