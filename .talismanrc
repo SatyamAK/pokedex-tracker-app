@@ -1,4 +1,6 @@
 fileignoreconfig:
+- filename: lib/pages/national_dex.dart
+  checksum: 8b1a87b2f712e0d1cf7693848217afb3c206f7e33c8da7889352f991feb4633a
 - filename: pubspec.lock
   checksum: a446e95430c7749ac80a8ef3ae58c779d18e18cdcca07f47e618050746abed1d
 - filename: .metadata

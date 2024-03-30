@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   Future<List<Map<String, dynamic>>?> _loadGames() async {
     List<Map<String, dynamic>> pokemonGamesWithPokemons = [];
-    String generation = 'Generation 3';
+    String generation = 'Generation 9';
     pokemonGamesJson[generation]?.forEach((element) async {
       final String data = await rootBundle.loadString(element);
       final Map<String, dynamic> pokemonGameJson = await jsonDecode(data);
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                 title: const Text('National'),
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const NationalDex('Generation 3'))
+                  MaterialPageRoute(builder: (context) => const NationalDex('Generation 9'))
                 ),
               ),
               ListView.builder(
