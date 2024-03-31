@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart';
 import 'package:pokedex_tracker/components/pokemon_card.dart';
-import 'package:pokedex_tracker/pages/pokedex.dart';
+import 'package:pokedex_tracker/model/pokemon.dart';
 
 class NationalDex extends StatefulWidget {
   final String selectedGeneration;
-  const NationalDex(this.selectedGeneration, {super.key});
+  const NationalDex({required this.selectedGeneration, super.key});
 
   @override
   State<NationalDex> createState() => _NationalDexState();
@@ -78,7 +77,7 @@ class _NationalDexState extends State<NationalDex> with SingleTickerProviderStat
   Widget pokemonsView(List<dynamic> pokemons) {
     return ListView.builder(
       itemCount: pokemons.length,
-      itemBuilder: (context, index) => PokemonCard(pokemons.elementAt(index))
+      itemBuilder: (context, index) => PokemonCard(pokemon: Pokemon.fromMap(pokemons.elementAt(index)))
     );
   }
 }

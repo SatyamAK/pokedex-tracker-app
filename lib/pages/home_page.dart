@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pokedex_tracker/constants/pokemon_games.dart';
+import 'package:pokedex_tracker/model/pokemon_game.dart';
 import 'package:pokedex_tracker/pages/national_dex.dart';
 import 'package:pokedex_tracker/pages/pokedex.dart';
 
@@ -39,7 +40,7 @@ class HomePage extends StatelessWidget {
                 title: const Text('National'),
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const NationalDex('Generation 9'))
+                  MaterialPageRoute(builder: (context) => const NationalDex(selectedGeneration: 'Generation 9'))
                 ),
               ),
               ListView.builder(
@@ -51,7 +52,7 @@ class HomePage extends StatelessWidget {
                     title: Text(gameWithPokemons!.elementAt(index)['game']),
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Pokedex(gameWithPokemons.elementAt(index)['pokemon'], gameWithPokemons.elementAt(index)['game']))
+                      MaterialPageRoute(builder: (context) => Pokedex(pokemonGame: PokemonGame.fromMap(gameWithPokemons.elementAt(index)),))
                     )
                   );
                 }

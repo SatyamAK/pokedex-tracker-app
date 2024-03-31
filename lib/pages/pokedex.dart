@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/components/pokemon_card.dart';
+import 'package:pokedex_tracker/model/pokemon_game.dart';
 
 class Pokedex extends StatelessWidget {
-  final List<dynamic> pokemons;
-  final String game;
-  const Pokedex(this.pokemons, this.game, {super.key});
+  final PokemonGame pokemonGame;
+  const Pokedex({required this.pokemonGame, super.key});
 
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(game),
+        title: Text(pokemonGame.name),
       ),
       body: ListView.builder(
-        itemCount: pokemons.length,
-        itemBuilder: (context, index) => PokemonCard(pokemons.elementAt(index))
+        itemCount: pokemonGame.pokemons.length,
+        itemBuilder: (context, index) => PokemonCard(pokemon: pokemonGame.pokemons.elementAt(index))
       ),
     );
   }
