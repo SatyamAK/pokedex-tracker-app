@@ -1,4 +1,34 @@
 fileignoreconfig:
+- filename: data/red-blue-yellow.json
+  checksum: 9436430725d447525bbb3c6992b7c85c12223f25769d3759f3f739e334f35807
+- filename: data/lets-go-pikachu-lets-go-eevee.json
+  checksum: 62c2d5cb77173f0d0fc20012da4b26d5845eac55e9acc4cf4e764d67e8140deb
+- filename: data/heartgold-soulsilver.json
+  checksum: 778a68cee1afd7a7dc95b48865c47c83e69b7aec125128d36ed4fc19847111f1
+- filename: data/gold-silver-crystal.json
+  checksum: b17e24c29f42d21d608ccbe2dbabb8fee4a68e16ace8df99a09751991c4ca789
+- filename: data/platinum.json
+  checksum: 53f86b9228bbc09844e07d6f7cd5f71a4a04a827355e9e25a0e7cd357e768318
+- filename: data/black-2-white-2.json
+  checksum: ab70921bd111e999aaea683b521dfaac03f3bab724a54bbd0c4ed937dfdb8b7f
+- filename: data/legends-arceus.json
+  checksum: 3571f998271df95c50f731569870df1df5bc23aebff687ed8f1a1c3bcb31c392
+- filename: data/firered-leafgreen.json
+  checksum: dc9ead6da45bb9be92e277771dff432493aa04a5f854e45bfd8d209adf78a56e
+- filename: data/sword-shield.json
+  checksum: 92502c5d572b060485d347ded45db2719120c5a5c454bb9a7fb3bca8c9cb1279
+- filename: data/omega-ruby-alpha-sapphire.json
+  checksum: d45bc5ede590e4b607b8d1dac1ead55568077bfd729235656b045f17ba7f9d80
+- filename: data/sun-moon.json
+  checksum: bc9e8a612e1352175117e0d13241120909a0fc39dbd9951433e2c9ca8d2044bc
+- filename: data/ultra-sun-ultra-moon.json
+  checksum: f5c2bed2bf491604cb5aa04ee1b4494e625a2f7b77c263cd807adc6e90c7e552
+- filename: data/ruby-sapphire-emerald.json
+  checksum: e93e87f7bd3d9e0dad9e9f38eb8cf54dfa2edb92eb2232effce42f60f92fcffd
+- filename: data/scarlet-violet.json
+  checksum: 0e128045a39d00502310272c04841db0d08692e8fd1496e39aac8fdf39d096a7
+- filename: data/pokedex.json
+  checksum: 9805d15c0d0c1e66f15495412986878206dd32ab2a1a307a8c28c51101a9b10a
 - filename: pubspec.lock
   checksum: a58ebdb736f62099d63202c9096fd17d03cdefcbeb7d8607d2475849d5a91bb6
 - filename: pubspec.lock
