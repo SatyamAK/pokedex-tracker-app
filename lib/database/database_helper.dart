@@ -55,4 +55,9 @@ class DataBaseHelper {
     sharedPreferences.setInt("activeProfileId", newlyAddedId);
     return newlyAddedId;
   }
+
+  Future<void> deleteProfile(int id) async {
+    final profilesDatabase = await profilesDb;
+    await profilesDatabase.delete(_profilesTableName, where: "ID = ?", whereArgs: [id]);
+  }
 }

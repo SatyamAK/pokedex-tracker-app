@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/pages/home_page.dart';
+import 'package:pokedex_tracker/provider/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ProfileProvider(),
+      child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

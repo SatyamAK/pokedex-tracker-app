@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/constants/pokemon_games.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
 import 'package:pokedex_tracker/model/profile.dart';
+import 'package:pokedex_tracker/provider/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class AddProfile extends StatefulWidget {
   const AddProfile({super.key});
@@ -55,7 +59,7 @@ class _AddProfileState extends State<AddProfile> {
                 ),
                 DropdownButtonFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Select generation you are player'
+                    hintText: 'Select generation you are playing'
                   ),
                   items: dropDownValues.map((generation) => DropdownMenuItem(value: generation,child: Text(generation),)).toList(),
                   onChanged: (value) => setState(() {
@@ -69,7 +73,10 @@ class _AddProfileState extends State<AddProfile> {
                     onPressed: () async {
                       if (!_key.currentState!.validate()) return;
                       Profile profile = Profile(name: _nameController.text, generation: selectedDropDownValue);
-                      await DataBaseHelper.instance.addProfile(profile);
+                      profile.id = await DataBaseHelper.instance.addProfile(profile);
+                      Provider.of<ProfileProvider>(context, listen: false).updateSelectedProfile(profile);
+                      Provider.of<ProfileProvider>(context, listen: false).updateProfiles(profile);
+                      Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: const Text('Register')
                   ),
