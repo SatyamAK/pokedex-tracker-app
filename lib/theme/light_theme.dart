@@ -32,7 +32,7 @@ ThemeData lightTheme(BuildContext context) {
     ),
     cardTheme: CardTheme(
       elevation: 1,
-      shadowColor: Theme.of(context).colorScheme.background,
+      shadowColor: Theme.of(context).colorScheme.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)), 
         side: BorderSide(width: 0.5)
