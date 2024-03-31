@@ -1,4 +1,8 @@
 fileignoreconfig:
+- filename: pubspec.lock
+  checksum: c88b815725935846ff24ea75d133df0abecba3767525ac70a05eb54a43375658
+- filename: lib/pages/add_profile.dart
+  checksum: e86e6615b4ff50c96c85d7b2480181a502947edbcf5fc68d2df133b3dddd9b45
 - filename: lib/pages/national_dex.dart
   checksum: 8b1a87b2f712e0d1cf7693848217afb3c206f7e33c8da7889352f991feb4633a
 - filename: pubspec.lock
