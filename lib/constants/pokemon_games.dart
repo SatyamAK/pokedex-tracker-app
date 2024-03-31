@@ -1,5 +1,5 @@
 const Map<String, List<String>> pokemonGamesJson = {
-  "Geneartion 1": [ "data/red-blue-yellow.json"],
+  "Generation 1": [ "data/red-blue-yellow.json"],
   "Generation 2": [ "data/gold-silver-crystal.json"],
   "Generation 3": [ "data/ruby-sapphire-emerald.json", "data/firered-leafgreen.json"],
   "Generation 4": [ "data/diamond-pearl.json", "data/platinum.json", "data/heartgold-soulsilver.json"],

@@ -13,6 +13,11 @@ class CaughtPokemonProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> refreshCaughtPokemons(int activeProfileId) async {
+    _caughtPokemons = {};
+    await getCaughtPokemons(activeProfileId);
+  }
+
   void addCaughtPokemon(pokemonName) {
     _caughtPokemons.add(pokemonName);
     notifyListeners();

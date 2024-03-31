@@ -81,6 +81,7 @@ class HomePage extends StatelessWidget {
     return FutureBuilder(
       future: _loadGames(profile),
       builder: (context, snapshot) {
+        bool isFirstGeneration = (profile.generation == "Generation 1");
         return (snapshot.hasData)?Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -92,7 +93,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 12.0),
               child: Text('These are the games in ${profile.generation}'),
             ),
-            ListTile(
+            (isFirstGeneration)?const SizedBox():ListTile(
               title: const Text('National'),
               onTap: () => Navigator.push(
                 context,
