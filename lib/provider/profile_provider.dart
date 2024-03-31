@@ -32,11 +32,12 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   void removeProfile(Profile profile) {
+    if(profile.id == _activeProfile.id) {
+      return;
+    }
     _profiles.remove(profile);
     if(_profiles.isEmpty) {
       _activeProfile = Profile(name: "", generation: "");
-    } else {
-      _activeProfile = _profiles.first;
     }
     notifyListeners();
   }
