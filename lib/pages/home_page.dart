@@ -32,7 +32,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Pokedex Tracker'),
       ),
       body: Consumer<ProfileProvider>(
@@ -91,10 +90,11 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
-              child: Text('These are the games in ${profile.generation}'),
+              child: Text('These are the games in ${profile.generation}', style: Theme.of(context).textTheme.bodySmall,),
             ),
             (isFirstGeneration)?const SizedBox():ListTile(
               title: const Text('National'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => NationalDex(selectedGeneration: profile.generation))
@@ -107,6 +107,7 @@ class HomePage extends StatelessWidget {
                 List<Map<String, dynamic>>? gameWithPokemons = snapshot.data;
                 return ListTile(
                   title: Text(gameWithPokemons!.elementAt(index)['game']),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Pokedex(pokemonGame: PokemonGame.fromMap(gameWithPokemons.elementAt(index)),))

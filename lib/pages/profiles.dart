@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:pokedex_tracker/constants/color.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
 import 'package:pokedex_tracker/pages/add_profile.dart';
 import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
@@ -14,7 +15,6 @@ class Profiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Profiles'),
       ),
       body: Consumer<ProfileProvider>(
@@ -35,10 +35,9 @@ class Profiles extends StatelessWidget {
                   subtitle: Text(selectedProfile.generation),
                   trailing: IconButton(
                     icon: (selectedProfile.id == profileProvider.activeProfile.id)?
-                    const Icon(Icons.delete, color: Colors.red,):const Icon(Icons.delete),
+                    const Icon(Icons.person, color: unselectedTabColor,):const Icon(Icons.delete),
                     onPressed: () async {
                       if(profileProvider.activeProfile.id == selectedProfile.id){
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Cannot delete active profile..')));
                         return;
                       }
                       await DataBaseHelper.instance.deleteProfile(selectedProfile.id!);

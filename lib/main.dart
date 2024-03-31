@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/pages/home_page.dart';
 import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
 import 'package:pokedex_tracker/provider/profile_provider.dart';
+import 'package:pokedex_tracker/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,10 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokedex Tracker',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: lightTheme(context),
       home: const HomePage(),
     );
   }

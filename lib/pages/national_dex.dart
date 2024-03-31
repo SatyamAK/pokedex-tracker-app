@@ -45,7 +45,6 @@ class _NationalDexState extends State<NationalDex> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('National Dex'),
         bottom: tabBar(),
       ),

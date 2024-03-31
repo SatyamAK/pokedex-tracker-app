@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_tracker/constants/color.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
 import 'package:pokedex_tracker/model/pokemon.dart';
 import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
@@ -19,7 +20,7 @@ class PokemonCard extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         key: key,
-        elevation: 1,
+        surfaceTintColor: typesColor[pokemon.types.first],
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           child: Row(
@@ -29,15 +30,18 @@ class PokemonCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(pokemon.id),
-                  Text(pokemon.name),
+                  Text(pokemon.id, style: Theme.of(context).textTheme.titleMedium),
+                  Text(pokemon.name, style: Theme.of(context).textTheme.bodySmall),
                   SizedBox(
                     height: 24,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemCount: pokemon.types.length,
-                      itemBuilder: (context, index) => Padding(padding: const EdgeInsets.only(right: 4), child: Text(pokemon.types.elementAt(index)),)
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Text(pokemon.types.elementAt(index), style: Theme.of(context).textTheme.titleMedium),
+                      )
                     )
                   )
                 ],
@@ -60,7 +64,7 @@ class PokemonCard extends StatelessWidget {
                           await DataBaseHelper.instance.addCaughtPokemon(activeProfileId, pokemon.name);
                           caughtPokemonIdProvider.addCaughtPokemon(pokemon.name);
                         },
-                        icon: (isCaught)?const Icon(Icons.catching_pokemon_rounded, color: Colors.red,)
+                        icon: (isCaught)?const Icon(Icons.catching_pokemon_rounded, color: Color(0xFF740800),)
                         : const Icon(Icons.catching_pokemon_sharp)
                       );
                     }
