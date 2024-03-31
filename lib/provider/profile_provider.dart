@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileProvider extends ChangeNotifier {
   Profile _activeProfile = Profile(name: "", generation: "");
-  List<Profile> _profiles = List.empty();
+  List<Profile> _profiles = List.empty(growable: true);
 
   Future<void> getActiveProfile() async {
     if(_activeProfile.id != null) return;

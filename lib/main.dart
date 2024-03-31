@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/pages/home_page.dart';
+import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
 import 'package:pokedex_tracker/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ProfileProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: (context) => CaughtPokemonProvider()),
+      ],
       child: const MyApp(),
     )
   );
