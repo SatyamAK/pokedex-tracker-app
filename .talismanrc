@@ -1,4 +1,8 @@
 fileignoreconfig:
+- filename: lib/components/app_bar_with_search.dart
+  checksum: 8a12c741803a99d9f065bea98b8f1450e2c67cc7eb62890967d99aa76a72773b
+- filename: lib/pages/national_dex.dart
+  checksum: 6912a740d0dae5b2eb59156650b0b84032ba95b72a9f8db261f50531491e7674
 - filename: data/red-blue-yellow.json
   checksum: 9436430725d447525bbb3c6992b7c85c12223f25769d3759f3f739e334f35807
 - filename: data/lets-go-pikachu-lets-go-eevee.json

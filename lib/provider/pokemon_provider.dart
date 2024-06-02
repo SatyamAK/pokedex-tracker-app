@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
+import 'package:pokedex_tracker/model/pokemon.dart';
 
-class CaughtPokemonProvider extends ChangeNotifier {
+class PokemonProvider extends ChangeNotifier {
   Set<String> _caughtPokemons = <String>{};
+  List<Pokemon> _pokemons = [];
 
   Future<void> getCaughtPokemons(int activeProfileId) async {
     if(_caughtPokemons.isNotEmpty) {
@@ -28,5 +30,11 @@ class CaughtPokemonProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updatePokemons(List<Pokemon> pokemons) {
+    _pokemons = pokemons;
+    notifyListeners();
+  }
+
   Set<String> get caughtPokemonIds => _caughtPokemons;
+  List<Pokemon> get pokemons => _pokemons;
 }

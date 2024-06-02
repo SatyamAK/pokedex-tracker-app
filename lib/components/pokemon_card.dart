@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/constants/color.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
 import 'package:pokedex_tracker/model/pokemon.dart';
-import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
+import 'package:pokedex_tracker/provider/pokemon_provider.dart';
 import 'package:pokedex_tracker/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -46,8 +46,7 @@ class PokemonCard extends StatelessWidget {
                   )
                 ],
               ),
-              // IconButton(onPressed: null, icon: const Icon(Icons.catching_pokemon_rounded, color: Colors.red,))
-              Consumer<CaughtPokemonProvider>(
+              Consumer<PokemonProvider>(
                 builder: (context, caughtPokemonIdProvider, child) {
                   int activeProfileId = Provider.of<ProfileProvider>(context, listen: false).activeProfile.id!;
                   return FutureBuilder(

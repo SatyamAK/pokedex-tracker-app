@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/constants/pokemon_games.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
 import 'package:pokedex_tracker/model/profile.dart';
-import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
+import 'package:pokedex_tracker/provider/pokemon_provider.dart';
 import 'package:pokedex_tracker/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +76,7 @@ class _AddProfileState extends State<AddProfile> {
                       profile.id = await DataBaseHelper.instance.addProfile(profile);
                       Provider.of<ProfileProvider>(context, listen: false).updateSelectedProfile(profile);
                       Provider.of<ProfileProvider>(context, listen: false).updateProfiles(profile);
-                      await Provider.of<CaughtPokemonProvider>(context, listen: false).refreshCaughtPokemons(profile.id!);
+                      await Provider.of<PokemonProvider>(context, listen: false).refreshCaughtPokemons(profile.id!);
                       Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: const Text('Register')

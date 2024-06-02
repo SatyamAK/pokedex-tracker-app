@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pokedex_tracker/constants/pokemon_games.dart';
+import 'package:pokedex_tracker/model/pokemon.dart';
 import 'package:pokedex_tracker/model/profile.dart';
 import 'package:pokedex_tracker/model/pokemon_game.dart';
 import 'package:pokedex_tracker/pages/add_profile.dart';
 import 'package:pokedex_tracker/pages/national_dex.dart';
 import 'package:pokedex_tracker/pages/pokedex.dart';
 import 'package:pokedex_tracker/pages/profiles.dart';
+import 'package:pokedex_tracker/provider/pokemon_provider.dart';
 import 'package:pokedex_tracker/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -76,6 +78,10 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  void _loadPokemons(List<Pokemon> pokemons, BuildContext context) {
+    Provider.of<PokemonProvider>(context, listen: false).updatePokemons(pokemons);
+  }
+
   Widget gamesView(Profile profile) {
     return FutureBuilder(
       future: _loadGames(profile),
@@ -108,10 +114,13 @@ class HomePage extends StatelessWidget {
                 return ListTile(
                   title: Text(gameWithPokemons!.elementAt(index)['game']),
                   trailing: const Icon(Icons.arrow_forward_ios, size: 16,),
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Pokedex(pokemonGame: PokemonGame.fromMap(gameWithPokemons.elementAt(index)),))
-                  )
+                  onTap: () => {
+                    _loadPokemons( PokemonGame.fromMap(gameWithPokemons.elementAt(index)).pokemons, context),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Pokedex(pokemonGame: PokemonGame.fromMap(gameWithPokemons.elementAt(index)),))
+                    )
+                  }
                 );
               }
             )

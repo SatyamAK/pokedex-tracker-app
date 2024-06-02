@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pokedex_tracker/components/app_bar_with_search.dart';
 import 'package:pokedex_tracker/components/pokemon_card.dart';
 import 'package:pokedex_tracker/model/pokemon.dart';
 
@@ -15,7 +16,9 @@ class NationalDex extends StatefulWidget {
 
 class _NationalDexState extends State<NationalDex> with SingleTickerProviderStateMixin {
   late TabController _tabController = _tabController = TabController(vsync: this, length: 0);
-  late Map<String, dynamic> pokemonsGenerationWiseToBeRendered = <String, dynamic>{};
+  late Map<String, dynamic> _pokemonsGenerationWiseToBeRendered = <String, dynamic>{};
+  int _activeTabIndex = 0;
+  List<dynamic> _pokemonsTobeRendered = [];
 
   void _loadPokemons() async {
     final String data = await rootBundle.loadString('data/pokedex.json');
@@ -30,8 +33,16 @@ class _NationalDexState extends State<NationalDex> with SingleTickerProviderStat
       requiredPokemonsGenerationWise[generation] = pokemonsGenerationWise[generation];
     }
     setState(() {
-      pokemonsGenerationWiseToBeRendered = requiredPokemonsGenerationWise;
+      _pokemonsGenerationWiseToBeRendered = requiredPokemonsGenerationWise;
       _tabController = TabController(vsync: this, length: requiredPokemonsGenerationWise.length);
+      _pokemonsTobeRendered = _pokemonsGenerationWiseToBeRendered['Generation 1'];
+    });
+    _tabController.addListener(() {
+      setState(() {
+        _activeTabIndex = _tabController.index;
+        var selectedGeneration = _pokemonsGenerationWiseToBeRendered.keys.elementAt(_activeTabIndex);
+        _pokemonsTobeRendered = _pokemonsGenerationWiseToBeRendered[selectedGeneration];
+      });
     });
   }
 
@@ -41,12 +52,27 @@ class _NationalDexState extends State<NationalDex> with SingleTickerProviderStat
     super.initState();
   }
 
+  void filterPokemons(String value, BuildContext context) {
+    var selectedGeneration = _pokemonsGenerationWiseToBeRendered.keys.elementAt(_activeTabIndex);
+    if(value == "") {
+      setState(() {
+        _pokemonsTobeRendered = _pokemonsGenerationWiseToBeRendered[selectedGeneration];
+      });
+    }
+    setState(() {
+      _pokemonsTobeRendered = _pokemonsGenerationWiseToBeRendered[selectedGeneration].where(
+        (pokemon) => pokemon["name"].toString().toLowerCase().contains(value.toLowerCase())
+      ).toList();
+    });
+  }
+
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBarWithsearch(
         title: const Text('National Dex'),
         bottom: tabBar(),
+        search: filterPokemons,
       ),
       body: body(),
     );
@@ -55,28 +81,30 @@ class _NationalDexState extends State<NationalDex> with SingleTickerProviderStat
   PreferredSizeWidget tabBar() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(32),
-      child: (pokemonsGenerationWiseToBeRendered.isEmpty)?const SizedBox():TabBar(
+      child: (_pokemonsGenerationWiseToBeRendered.isEmpty)?const SizedBox():TabBar(
         isScrollable: true,
         tabAlignment: TabAlignment.start,
         controller: _tabController,
-        tabs: pokemonsGenerationWiseToBeRendered.keys.map((generation) => Tab(child: Text(generation),)).toList()
+        tabs: _pokemonsGenerationWiseToBeRendered.keys.map((generation) => Tab(child: Text(generation),)).toList()
       )
     );
   }
 
   Widget body() {
-    return (pokemonsGenerationWiseToBeRendered.isEmpty)?const Center( child: CircularProgressIndicator()):TabBarView(
+    return (_pokemonsGenerationWiseToBeRendered.isEmpty)?const Center( child: CircularProgressIndicator()):TabBarView(
       controller: _tabController,
-      children: pokemonsGenerationWiseToBeRendered.keys.map(
-        (generation) => pokemonsView(pokemonsGenerationWiseToBeRendered[generation])
+      children: _pokemonsGenerationWiseToBeRendered.keys.map(
+        (generation) {
+          return pokemonsView();
+        }
       ).toList()
     );
   }
 
-  Widget pokemonsView(List<dynamic> pokemons) {
+  Widget pokemonsView() {
     return ListView.builder(
-      itemCount: pokemons.length,
-      itemBuilder: (context, index) => PokemonCard(pokemon: Pokemon.fromMap(pokemons.elementAt(index)))
+      itemCount: _pokemonsTobeRendered.length,
+      itemBuilder: (context, index) => PokemonCard(pokemon: Pokemon.fromMap(_pokemonsTobeRendered.elementAt(index)))
     );
   }
 }

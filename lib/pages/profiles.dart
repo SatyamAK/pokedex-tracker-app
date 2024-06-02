@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_tracker/constants/color.dart';
 import 'package:pokedex_tracker/database/database_helper.dart';
 import 'package:pokedex_tracker/pages/add_profile.dart';
-import 'package:pokedex_tracker/provider/caught_pokemon_provider.dart';
+import 'package:pokedex_tracker/provider/pokemon_provider.dart';
 import 'package:pokedex_tracker/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +29,7 @@ class Profiles extends StatelessWidget {
                 return ListTile(
                   onTap: () async {
                     profileProvider.updateSelectedProfile(selectedProfile);
-                    await Provider.of<CaughtPokemonProvider>(context, listen: false).refreshCaughtPokemons(selectedProfile.id!);
+                    await Provider.of<PokemonProvider>(context, listen: false).refreshCaughtPokemons(selectedProfile.id!);
                   },
                   title: Text(selectedProfile.name),
                   subtitle: Text(selectedProfile.generation),
