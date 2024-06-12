@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_tracker/constants/color.dart';
 
 class AppBarWithsearch extends StatefulWidget implements PreferredSizeWidget {
   final Widget title;
   final PreferredSizeWidget? bottom;
   final Function(String value, BuildContext context) search;
   const AppBarWithsearch({super.key, required this.title, this.bottom, required this.search}) : 
-    preferredSize = (bottom != null)?const Size.fromHeight(84):const Size.fromHeight(52);
+    preferredSize = const Size.fromHeight(112);
 
   @override
   State<AppBarWithsearch> createState() => _AppBarWithsearchState();
@@ -15,52 +16,43 @@ class AppBarWithsearch extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _AppBarWithsearchState extends State<AppBarWithsearch> {
-  bool _isSearching = false;
   final TextEditingController _textController = TextEditingController();
 
   @override
   AppBar build(BuildContext context) {
     return AppBar(
-      title:  (_isSearching)?searchBox():widget.title,
-      bottom: widget.bottom,
-      actions: [
-        IconButton(
-          onPressed: ()=>{
-            setState(() {
-              _isSearching = !_isSearching;
-            })
-          },
-          icon: Icon(
-            (_isSearching)?Icons.cancel_outlined:Icons.search
-          )
-        )
-      ],
+      title:  widget.title,
+      bottom: searchBox(),
     );
   }
 
-  Widget searchBox() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xffF5F5F5),
-        borderRadius: BorderRadius.circular(5)
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: TextField(
-          controller: _textController,
-          decoration: InputDecoration(
-            suffixIcon: IconButton(
-              icon: Icon(
-                Icons.search_rounded,
-                color: Theme.of(context).primaryColorDark,
+  PreferredSizeWidget searchBox() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(32),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        decoration: BoxDecoration(
+          color: appBarTextColor,
+          borderRadius: BorderRadius.circular(24)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: TextField(
+            controller: _textController,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.search_rounded,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () => FocusScope.of(context).unfocus(),
               ),
-              onPressed: () => FocusScope.of(context).unfocus(),
+              hintText: 'Search',
+              border: InputBorder.none,
             ),
-            hintText: 'Bulbasaur...',
-            border: InputBorder.none,
+            onChanged: (value) => widget.search(value, context),
+            onSubmitted: (value) => widget.search(value, context),
           ),
-          onChanged: (value) => widget.search(value, context),
-          onSubmitted: (value) => widget.search(value, context),
         ),
       ),
     );
