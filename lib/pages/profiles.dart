@@ -30,6 +30,7 @@ class Profiles extends StatelessWidget {
                   onTap: () async {
                     profileProvider.updateSelectedProfile(selectedProfile);
                     await Provider.of<PokemonProvider>(context, listen: false).refreshCaughtPokemons(selectedProfile.id!);
+                    Navigator.pop(context);
                   },
                   title: Text(selectedProfile.name),
                   subtitle: Text(selectedProfile.generation),
